@@ -1,0 +1,37 @@
+#!/bin/sh
+# -*- ruby -*-
+exec ruby -x "$0" "$@"
+#!ruby
+
+require_relative 'kaminari_okoshi'
+require 'optionparser'
+require 'json'
+require 'pry'
+
+module Runner
+  attr_reader *(%i[table_name options])
+
+  def parse!
+    @options = {}
+
+    OptionParser.new do |opt|
+      opt.on("-t total", "--total total", "create count",         Integer) { |v| @options[:total] = v }
+      opt.on("-s step",  "--step step",   "number of per commit", Integer) { |v| @options[:step] = v }
+      opt.on("-u uniqs", "--uniqs uniqs", "unique columns",       Array)   { |v| @options[:uniqs] = v }
+      opt.on("-n nulls", "--nulls nulls", "null columns",         Array)   { |v| @options[:nulls] = v }
+      opt.on("-r refs",  "--refs refs",   "associate columns",    String)  { |v| @options[:refs] = eval v }
+      opt.on("-d db",    "--db db",       "connect to DB",        Array)   { |v| @options[:db] = v }
+    end.parse(ARGV.dup)
+
+    @table_name = ARGV[0]
+  end
+
+  def run!
+    KaminariOkoshi.run(table_name, **options)
+  end
+end
+
+include Runner
+
+parse!
+run!

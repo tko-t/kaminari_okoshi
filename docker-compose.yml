@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  app:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+    container_name: "kaminari_okoshi"
+    volumes:
+      - ".:/app"

@@ -1,0 +1,10 @@
+development:
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_general_ci
+  timeout: 5000
+  port: 3306
+  database: sample_development
+  username: root
+  password: password
+  host:     host.docker.internal
