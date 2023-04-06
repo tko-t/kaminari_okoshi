@@ -1,6 +1,6 @@
 ### Custom Values
 
-when there is `ext/<table_name>.rb`. DummyMaker is used by prepending
+when there is `ext/<table_name>.rb`. KaminariOkoshi is used by prepending
 
 #### Sample
 

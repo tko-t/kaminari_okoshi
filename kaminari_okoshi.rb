@@ -91,7 +91,8 @@ class KaminariOkoshi
   def set_refs(refs)
     @refs ||= {}
     refs.each do |column_name, ref|
-      ref = [:table, :column].zip(ref).to_h if ref.is_a?(Array) # 順番さえ守ればArrayでもいい
+      ref = [:table, :column].zip(ref).to_h if ref.is_a?(Array)             # ex. ['accounts', 'id']
+      ref = [:table, :column].zip(ref.split('.')).to_h if ref.is_a?(String) # ex. 'accounts.id'
       ref.symbolize_keys!
       @refs[column_name] = model(ref[:table]).select(ref[:column]).distinct.pluck(ref[:column])
     end

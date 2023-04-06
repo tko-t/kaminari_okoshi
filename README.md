@@ -61,6 +61,12 @@ refs can also be an Array
 $ ... "{ total: 100, step: 10, refs: { country_id: [:countries, :id] }, db: ['development'] }"
 ```
 
+refs can also be an String
+
+```
+$ ... "{ total: 100, step: 10, refs: { country_id: 'countries.id' }, db: ['development'] }"
+```
+
 #### Sample Values
 
 * integer  
